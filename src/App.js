@@ -1,21 +1,33 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import About from './components/About';
 import Experience from './components/Experience';
 import Footer from './components/Footer';
 import './styles/styles.css';
 
-// Renommez cette fonction pour éviter les conflits
-function MyApp() {
+function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={() => window.location.href = '/index.html'} />
-        <Route path="/portfolio-details" component={() => window.location.href = '/portfolio-details.html'} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/portfolio-details" element={<PortfolioDetails />} />
+      </Routes>
+      <div className="App">
+        <Header />
+        <main>
+          <About />
+          <Experience />
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }
 
-export default MyApp;
+function PortfolioDetails() {
+  window.location.href = "/portfolio-details.html";
+  return null;
+}
+
+export default App;
